@@ -1,6 +1,28 @@
-export default function MovieDetail({params: {id},}: {params: {id: string}}){
-    console.log("props!! ===========> ", id);
+import { Suspense } from "react";
+import MovieInfo from "../../../../components/movie-info";
+import MovieVidos from "../../../../components/movie-videos";
+
+
+export default async function MovieDetail({params: {id},}: {params: {id: string}}){
+    // console.log("props!! ===========> ", id);
+
+    // 병렬적 실행
+    // const [movie, videos] = await Promise.all([getMovie(id), getVideos(id)]);
+
     return (
-        <h1>MovieDetail</h1>
+        <div>
+            {/* page 단위 로딩 => loading.tsx */}
+             {/* 서버 컴포넌트 단위 로딩 => Suspense(
+                Promise.all과 비슷하지만 Promise.all은 전부 렌더 되어야하는데
+                Suspense는 개별적 로딩이 가능
+            ) */}
+            <Suspense fallback={<h1>Loading moive info</h1>}>
+                <MovieInfo id={id}/>
+            </Suspense>
+
+            <Suspense fallback={<h1>Loading moive videos</h1>}>
+                <MovieVidos id={id}/>
+            </Suspense>
+        </div>
     )
 }
