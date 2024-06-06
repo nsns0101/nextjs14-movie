@@ -1,0 +1,28 @@
+.movie {
+    display: grid;
+    /* 첫번째 행은 사용가능한 공간을 모두차지, 2행은 자식요소의 크기에 따라 자동조절 (fr은 fraction의 약자) */
+    grid-template-rows: 1fr auto;
+    gap: 20px;
+    cursor: pointer;
+    place-items: center;
+}
+    
+.movie img {
+    max-width: 100%;
+    min-height: 100%;
+    border-radius: 10px;
+    transition: opacity 0.3s ease-in-out;
+}
+    
+.movie img {
+    opacity: 0.7;
+}
+    
+.movie img:hover {
+    opacity: 1;
+}
+    
+.movie a {
+    text-align: center;
+}
+    

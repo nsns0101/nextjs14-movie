@@ -1,9 +1,21 @@
 import { Suspense } from "react";
-import MovieInfo from "../../../../components/movie-info";
-import MovieVidos from "../../../../components/movie-videos";
+import MovieInfo, { getMovie } from "../../../../components/movie-info";
+import MovieVideos from "../../../../components/movie-videos";
+
+interface IParams {
+    params: { id: string };
+}
+
+export async function generateMetadata( {params: { id } }: IParams){
+// export async function generateMetadata({params: {id}} : IParams){
+    const movie = await getMovie(id);
+    return {
+        title: movie.title,
+    };
+}
 
 
-export default async function MovieDetail({params: {id},}: {params: {id: string}}){
+export default async function MovieDetailPage({params: {id}}: IParams}){
     // console.log("props!! ===========> ", id);
 
     // 병렬적 실행
@@ -21,7 +33,7 @@ export default async function MovieDetail({params: {id},}: {params: {id: string}
             </Suspense>
 
             <Suspense fallback={<h1>Loading moive videos</h1>}>
-                <MovieVidos id={id}/>
+                <MovieVideos id={id}/>
             </Suspense>
         </div>
     )
