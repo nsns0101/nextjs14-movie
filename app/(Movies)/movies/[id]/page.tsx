@@ -15,7 +15,7 @@ export async function generateMetadata( {params: { id } }: IParams){
 }
 
 
-export default async function MovieDetailPage({params: {id}}: IParams}){
+export default async function MovieDetailPage({params: {id}}: IParams){
     // console.log("props!! ===========> ", id);
 
     // 병렬적 실행
